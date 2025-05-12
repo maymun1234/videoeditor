@@ -11,6 +11,7 @@ from videoeditor2_2 import videoeditor2
 class TimelineView(QGraphicsView):
     def __init__(self, parent=None):
         super().__init__(parent)
+        
         self.setScene(QGraphicsScene(self))
         self.setRenderHint(QPainter.Antialiasing)
         self.setDragMode(QGraphicsView.RubberBandDrag)
