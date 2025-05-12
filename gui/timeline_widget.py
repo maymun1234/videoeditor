@@ -1,8 +1,7 @@
 from PyQt5.QtWidgets import QGraphicsView, QGraphicsScene, QGraphicsItem, QApplication
-from PyQt5.QtGui import QBrush, QColor, QPen
-from PyQt5.QtCore import QRectF, Qt, QPointF
+from PyQt5.QtGui import *
+from PyQt5.QtCore import *
 import sys
-
 
 print("Timeline widget başlatılıyor...")  # Bu satırı ekle
 
@@ -11,7 +10,9 @@ class TimelineView(QGraphicsView):
         super().__init__()
         print("TimelineView başlatılıyor...")  # Bu satırı ekle
         self.setScene(TimelineScene())
-        self.setRenderHint(QGraphicsView.Antialiasing)
+
+        self.setRenderHint(QPainter.Antialiasing)
+        
         self.setDragMode(QGraphicsView.RubberBandDrag)
         self.setViewportUpdateMode(QGraphicsView.BoundingRectViewportUpdate)
         self.setBackgroundBrush(QBrush(QColor(30, 30, 30)))
@@ -51,6 +52,7 @@ class TrackItem(QGraphicsItem):
 
 
 if __name__ == "__main__":
+    print("Uygulama başlatılıyor...")
     app = QApplication(sys.argv)
     view = TimelineView()
 
@@ -62,8 +64,3 @@ if __name__ == "__main__":
 
     view.show()
     sys.exit(app.exec_())
-    ""
-if __name__ == "__main__":
-    print("Uygulama başlatılıyor...")  # Bu satırı ekle
-    app = QApplication(sys.argv)
-    view = TimelineView()
