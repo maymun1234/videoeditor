@@ -1,4 +1,3 @@
-# core/models/project.py
 import os
 import json
 from typing import List, Optional
@@ -6,7 +5,7 @@ from datetime import datetime
 from .track import Track
 
 class Project:
-    FILE_EXTENSION = ".aydiv"  # Proje dosyası uzantısı
+    FILE_EXTENSION = ".aydiv"
 
     def __init__(self, name: str, project_dir: Optional[str] = None):
         self.name: str = name
@@ -16,10 +15,6 @@ class Project:
         self.tracks: List[Track] = []
         self.created_at: str = datetime.utcnow().isoformat()
         self.modified_at: str = self.created_at
-
-    @property
-    def project_path(self) -> str:
-        return os.path.join(self.project_dir, f"{self.name}{self.FILE_EXTENSION}")
 
     def add_track(self, track: Track):
         self.tracks.append(track)
@@ -52,6 +47,7 @@ class Project:
         proj = cls(name=data["name"])
         proj.created_at = data.get("created_at", proj.created_at)
         proj.modified_at = data.get("modified_at", proj.modified_at)
+
         if "project_dir" in data:
             proj.project_dir = data["project_dir"]
 

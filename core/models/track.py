@@ -1,20 +1,14 @@
-# core/models/track.py
+from .media import MediaHandler  # Media işleme işlemleri burada olacak
 
 class Track:
     def __init__(self, media_file: str):
         self.media_file = media_file
-        self.filters = []  # Filtreler burada saklanır
+        self.filters = []
 
-    def add_filter(self, filter):
-        self.filters.append(filter)
-
-    def remove_filter(self, filter_name: str):
-        self.filters = [f for f in self.filters if f.name != filter_name]
-
-    def apply_filters(self):
-        for filter in self.filters:
-            # Filtreyi medya verisi üzerinde uygula
-            pass
+    def get_media_duration(self) -> float:
+        """Medya dosyasının süresini döndürür (ses ya da video)."""
+        media_handler = MediaHandler(self.media_file)
+        return media_handler.get_duration()
 
     def to_dict(self):
         return {
