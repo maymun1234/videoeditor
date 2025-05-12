@@ -18,7 +18,18 @@ class TimelineView(QGraphicsView):
         self.setBackgroundBrush(QBrush(QColor(30, 30, 30)))
         self.setWindowTitle("Timeline Editor")
         self.resize(800, 200)
+        
+        self.setTransformationAnchor(QGraphicsView.AnchorUnderMouse)  # Zoom işlemi mouse pozisyonuna göre yapılacak
+        self.scale_factor = 1.1  # Zoom faktörü
 
+    def wheelEvent(self, event):
+        """Fare tekerleği ile zoom işlemi yapılır."""
+        angle = event.angleDelta().y()
+        
+        if angle > 0:
+            self.scale(self.scale_factor, self.scale_factor)  # Zoom in
+        else:
+            self.scale(1 / self.scale_factor, 1 / self.scale_factor)  # Zoom out
 
 class TimelineScene(QGraphicsScene):
     def __init__(self):
